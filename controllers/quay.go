@@ -30,11 +30,11 @@ type QuayController struct {
 
 var _ Controller = (*QuayController)(nil)
 
-const quayUserAPI = "https://quay.io/api/v1/user"
+const quayUserAPI = "https://stage.quay.io/api/v1/user"
 
 var quayEndpoint = oauth2.Endpoint{
-	AuthURL:  "https://quay.io/oauth/authorize",
-	TokenURL: "https://quay.io/oauth/token",
+	AuthURL:  "https://stage.quay.io/oauth/authorize",
+	TokenURL: "https://stage.quay.io/oauth/token",
 }
 
 func (q QuayController) Authenticate(w http.ResponseWriter, r *http.Request) {

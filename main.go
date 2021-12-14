@@ -21,6 +21,7 @@ import (
 	"os"
 	"spi-oauth/config"
 	"spi-oauth/controllers"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"go.uber.org/zap"
@@ -66,8 +67,9 @@ func start(cfg config.Configuration, port int) {
 		if err != nil {
 			zap.L().Error("failed to initialize controller: %s", zap.Error(err))
 		}
-		router.Handle(fmt.Sprintf("/%s/authenticate", sp), http.HandlerFunc(controller.Authenticate)).Methods("GET")
-		router.Handle(fmt.Sprintf("/%s/callback", sp), http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		zap.L().Info(string(sp.ServiceProviderType))
+		router.Handle(fmt.Sprintf("/%s/authenticate", strings.ToLower(string(sp.ServiceProviderType))), http.HandlerFunc(controller.Authenticate)).Methods("GET")
+		router.Handle(fmt.Sprintf("/%s/callback", strings.ToLower(string(sp.ServiceProviderType))), http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			controller.Callback(context.Background(), w, r)
 		})).Methods("GET")
 		router.HandleFunc("/health", OkHandler).Methods("GET")

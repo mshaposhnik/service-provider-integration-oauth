@@ -34,7 +34,7 @@ func FromConfiguration(configuration config.ServiceProviderConfiguration) (Contr
 	case config.ServiceProviderTypeGitHub:
 		return &GitHubController{Config: configuration}, nil
 	case config.ServiceProviderTypeQuay:
-		return nil, fmt.Errorf("not implemented yet")
+		return &QuayController{Config: configuration}, nil
 	}
 	return nil, fmt.Errorf("not implemented yet")
 }
