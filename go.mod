@@ -3,7 +3,7 @@ module spi-oauth
 go 1.16
 
 require (
-	github.com/alexflint/go-arg v1.4.2
+	github.com/alexflint/go-arg v1.4.3
 	github.com/go-jose/go-jose/v3 v3.0.0
 	github.com/gorilla/mux v1.8.0
 	github.com/stretchr/testify v1.7.0
