@@ -156,7 +156,8 @@ func main() {
 func start(cfg config.Configuration, port int, kubeConfig *rest.Config, devmode bool) {
 	router := mux.NewRouter()
 
-	if devmode {
+	// insecure mode only allowed when the trusted root certificate is not specified...
+	if devmode && kubeConfig.TLSClientConfig.CAFile == "" {
 		kubeConfig.Insecure = true
 	}
 
