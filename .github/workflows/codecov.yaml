@@ -30,7 +30,7 @@ jobs:
           minikube kubectl -- apply -f https://raw.githubusercontent.com/redhat-appstudio/service-provider-integration-operator/main/config/crd/bases/appstudio.redhat.com_spiaccesstokenbindings.yaml
           minikube kubectl -- apply -f https://raw.githubusercontent.com/redhat-appstudio/service-provider-integration-operator/main/config/crd/bases/appstudio.redhat.com_spiaccesstokendataupdates.yaml
       - name: Set up Go 1.x
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1.17
       - name: Run tests

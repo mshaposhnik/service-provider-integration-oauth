@@ -136,6 +136,8 @@ func main() {
 	undo := zap.ReplaceGlobals(logger)
 	defer undo()
 
+	zap.L().Debug("environment", zap.Strings("env", os.Environ()))
+
 	cfg, err := config.LoadFrom(args.ConfigFile)
 	if err != nil {
 		zap.L().Error("failed to initialize the configuration", zap.Error(err))
@@ -208,6 +210,8 @@ func start(cfg config.Configuration, port int, kubeConfig *rest.Config, devmode 
 	}
 
 	for _, sp := range cfg.ServiceProviders {
+		zap.L().Debug("initializing service provider controller", zap.String("type", string(sp.ServiceProviderType)), zap.String("url", sp.ServiceProviderBaseUrl))
+
 		controller, err := controllers.FromConfiguration(cfg, sp, sessionManager, cl, strg, redirectTpl)
 		if err != nil {
 			zap.L().Error("failed to initialize controller: %s", zap.Error(err))
