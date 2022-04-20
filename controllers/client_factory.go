@@ -14,7 +14,7 @@
 package controllers
 
 import (
-	"github.com/redhat-appstudio/service-provider-integration-operator/api/v1beta1"
+	"github.com/mshaposhnik/service-provider-integration-operator/api/v1beta1"
 	authz "k8s.io/api/authorization/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"

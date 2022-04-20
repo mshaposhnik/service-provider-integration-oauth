@@ -19,7 +19,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/redhat-appstudio/service-provider-integration-operator/pkg/spi-shared/httptransport"
+	"github.com/mshaposhnik/service-provider-integration-operator/pkg/spi-shared/httptransport"
 
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	"k8s.io/client-go/rest"

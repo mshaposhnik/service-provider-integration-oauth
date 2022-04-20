@@ -1,6 +1,7 @@
 {
-  "access_token": "123",
-  "expiry": "123135429034087083",
+  "username": "mshaposhnik+tekton_demo",
+  "access_token": "TPQ8OQSY8CC7SNLKH7T7RFN9G8B8N2ZDNC09MI7R8TF5DBZFX7T0NGO2PQD6A3AJ",
+  "expiry": 90340870832134324,
   "refresh_token": "",
   "token_type": "bearer"
 }

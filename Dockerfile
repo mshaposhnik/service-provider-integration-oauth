@@ -18,7 +18,7 @@ COPY controllers/ controllers/
 # build service
 # Note that we're not running the tests here. Our integration tests depend on a running cluster which would not be
 # available in the docker build.
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o spi-oauth main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOPRIVATE=* go build -a -o spi-oauth main.go
 
 # Use distroless as minimal base image to package the manager binary
 # Refer to https://github.com/GoogleContainerTools/distroless for more details

@@ -25,10 +25,10 @@ import (
 
 	"strings"
 
-	"github.com/redhat-appstudio/service-provider-integration-operator/api/v1beta1"
-	"github.com/redhat-appstudio/service-provider-integration-operator/pkg/spi-shared/config"
-	"github.com/redhat-appstudio/service-provider-integration-operator/pkg/spi-shared/oauthstate"
-	"github.com/redhat-appstudio/service-provider-integration-operator/pkg/spi-shared/tokenstorage"
+	"github.com/mshaposhnik/service-provider-integration-operator/api/v1beta1"
+	"github.com/mshaposhnik/service-provider-integration-operator/pkg/spi-shared/config"
+	"github.com/mshaposhnik/service-provider-integration-operator/pkg/spi-shared/oauthstate"
+	"github.com/mshaposhnik/service-provider-integration-operator/pkg/spi-shared/tokenstorage"
 	"go.uber.org/zap"
 	"golang.org/x/oauth2"
 	"sigs.k8s.io/controller-runtime/pkg/client"

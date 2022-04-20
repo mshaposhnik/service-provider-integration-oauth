@@ -30,10 +30,10 @@ import (
 	"github.com/alexedwards/scs"
 	"github.com/alexedwards/scs/stores/memstore"
 
-	"github.com/redhat-appstudio/service-provider-integration-operator/api/v1beta1"
+	"github.com/mshaposhnik/service-provider-integration-operator/api/v1beta1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/redhat-appstudio/service-provider-integration-operator/pkg/spi-shared/oauthstate"
+	"github.com/mshaposhnik/service-provider-integration-operator/pkg/spi-shared/oauthstate"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
@@ -41,7 +41,7 @@ import (
 	. "github.com/onsi/gomega"
 
 	"github.com/go-jose/go-jose/v3/json"
-	"github.com/redhat-appstudio/service-provider-integration-operator/pkg/spi-shared/config"
+	"github.com/mshaposhnik/service-provider-integration-operator/pkg/spi-shared/config"
 	"golang.org/x/oauth2"
 )
 

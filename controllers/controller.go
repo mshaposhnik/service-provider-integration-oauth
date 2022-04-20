@@ -20,8 +20,8 @@ import (
 	"net/http"
 
 	"github.com/alexedwards/scs"
-	"github.com/redhat-appstudio/service-provider-integration-operator/pkg/spi-shared/config"
-	"github.com/redhat-appstudio/service-provider-integration-operator/pkg/spi-shared/tokenstorage"
+	"github.com/mshaposhnik/service-provider-integration-operator/pkg/spi-shared/config"
+	"github.com/mshaposhnik/service-provider-integration-operator/pkg/spi-shared/tokenstorage"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/github"
 )

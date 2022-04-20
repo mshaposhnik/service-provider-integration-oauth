@@ -8,9 +8,9 @@ require (
 	github.com/go-jose/go-jose/v3 v3.0.0
 	github.com/gorilla/mux v1.8.0
 	github.com/hashicorp/vault v1.9.4
+	github.com/mshaposhnik/service-provider-integration-operator v0.2.4-0.20220419162524-760fa56aee14
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.19.0
-	github.com/redhat-appstudio/service-provider-integration-operator v0.4.3
 	github.com/stretchr/testify v1.7.0
 	go.uber.org/zap v1.19.1
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8

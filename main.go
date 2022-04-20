@@ -24,7 +24,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/redhat-appstudio/service-provider-integration-operator/api/v1beta1"
+	"github.com/mshaposhnik/service-provider-integration-operator/api/v1beta1"
 	authz "k8s.io/api/authorization/v1"
 	"k8s.io/apimachinery/pkg/api/meta"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -33,7 +33,7 @@ import (
 
 	"github.com/alexedwards/scs"
 	"github.com/alexedwards/scs/stores/memstore"
-	"github.com/redhat-appstudio/service-provider-integration-operator/pkg/spi-shared/tokenstorage"
+	"github.com/mshaposhnik/service-provider-integration-operator/pkg/spi-shared/tokenstorage"
 	"k8s.io/apimachinery/pkg/api/errors"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
@@ -41,8 +41,8 @@ import (
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 
+	"github.com/mshaposhnik/service-provider-integration-operator/pkg/spi-shared/config"
 	"github.com/redhat-appstudio/service-provider-integration-oauth/controllers"
-	"github.com/redhat-appstudio/service-provider-integration-operator/pkg/spi-shared/config"
 
 	"github.com/gorilla/mux"
 	"go.uber.org/zap"
