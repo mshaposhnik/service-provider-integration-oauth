@@ -41,11 +41,12 @@ import (
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 
+	"github.com/gorilla/mux"
 	"github.com/mshaposhnik/service-provider-integration-operator/pkg/spi-shared/config"
 	"github.com/redhat-appstudio/service-provider-integration-oauth/controllers"
-
-	"github.com/gorilla/mux"
 	"go.uber.org/zap"
+	"spi-oauth/config"
+	"spi-oauth/controllers"
 )
 
 type cliArgs struct {
@@ -211,12 +212,10 @@ func start(cfg config.Configuration, port int, kubeConfig *rest.Config, devmode 
 		if err != nil {
 			zap.L().Error("failed to initialize controller: %s", zap.Error(err))
 		}
-
-		prefix := strings.ToLower(string(sp.ServiceProviderType))
-
-		router.Handle(fmt.Sprintf("/%s/authenticate", prefix), http.HandlerFunc(controller.Authenticate)).Methods("GET", "POST")
-		router.Handle(fmt.Sprintf("/%s/callback", prefix), http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			controller.Callback(r.Context(), w, r)
+		zap.L().Info(string(sp.ServiceProviderType))
+		router.Handle(fmt.Sprintf("/%s/authenticate", strings.ToLower(string(sp.ServiceProviderType))), http.HandlerFunc(controller.Authenticate)).Methods("GET")
+		router.Handle(fmt.Sprintf("/%s/callback", strings.ToLower(string(sp.ServiceProviderType))), http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			controller.Callback(context.Background(), w, r)
 		})).Methods("GET")
 	}
 

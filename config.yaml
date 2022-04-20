@@ -1,0 +1,12 @@
+# This configuration is shared between the OAuth Service and the SPI operator
+
+sharedSecretFile: /tmp/over-there
+serviceProviders:
+- type: GitHub
+  clientId: "123"
+  clientSecret: "42"
+  redirectUrl: https://localhost:8080/github/callback
+- type: Quay
+  clientId: ""
+  clientSecret: ""
+  redirectUrl: http://localhost:8000/quay/callback

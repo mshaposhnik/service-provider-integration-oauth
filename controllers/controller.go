@@ -32,9 +32,17 @@ type Controller interface {
 	// Authenticate handles the initial OAuth request. It should validate that the request is authenticated in Kubernetes
 	// compose the authenticated OAuth state and return a redirect to the service-provider OAuth endpoint with the state.
 	Authenticate(w http.ResponseWriter, r *http.Request)
-
-	// Callback finishes the OAuth flow. It handles the final redirect from the OAuth flow of the service provider.
 	Callback(ctx context.Context, w http.ResponseWriter, r *http.Request)
+}
+
+func FromConfiguration(configuration config.ServiceProviderConfiguration) (Controller, error) {
+	switch configuration.ServiceProviderType {
+	case config.ServiceProviderTypeGitHub:
+		return &GitHubController{Config: configuration}, nil
+	case config.ServiceProviderTypeQuay:
+		return &QuayController{Config: configuration}, nil
+	}
+	return nil, fmt.Errorf("not implemented yet")
 }
 
 // oauthFinishResult is an enum listing the possible results of authentication during the commonController.finishOAuthExchange

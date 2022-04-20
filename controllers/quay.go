@@ -17,8 +17,60 @@ import (
 	"golang.org/x/oauth2"
 )
 
-// quayEndpoint is the OAuth endpoints specification of quay.io
+type QuayController struct {
+	Config config.ServiceProviderConfiguration
+}
+
+var _ Controller = (*QuayController)(nil)
+
+const quayUserAPI = "https://stage.quay.io/api/v1/user"
+
 var quayEndpoint = oauth2.Endpoint{
-	AuthURL:  "https://quay.io/oauth/authorize",
-	TokenURL: "https://quay.io/oauth/access_token",
+	AuthURL:  "https://stage.quay.io/oauth/authorize",
+	TokenURL: "https://stage.quay.io/oauth/token",
+}
+
+func (q QuayController) Authenticate(w http.ResponseWriter, r *http.Request) {
+	commonAuthenticate(w, r, &q.Config, quayEndpoint)
+}
+
+func (q QuayController) Callback(ctx context.Context, w http.ResponseWriter, r *http.Request) {
+	token, err := finishOAuthExchange(ctx, r, &q.Config, quayEndpoint)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		logAndWriteResponse(w, "error in Quay token exchange", err)
+		return
+	}
+
+	req, err := http.NewRequest("GET", quayUserAPI, nil)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		logAndWriteResponse(w, "failed making Quay request", err)
+		return
+	}
+	req.Header.Set("Authorization", "Bearer "+token.AccessToken)
+	client := &http.Client{}
+	response, err := client.Do(req)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		logAndWriteResponse(w, "failed getting Quay user", err)
+		return
+	}
+
+	defer func() {
+		if err := response.Body.Close(); err != nil {
+			zap.L().Error("failed to close the response body", zap.Error(err))
+		}
+	}()
+
+	content, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		logAndWriteResponse(w, "failed parsing Quay user data", err)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Oauth Token: %s", token.AccessToken)
+	fmt.Fprintf(w, "User data: %s", string(content))
 }
