@@ -1,4 +1,4 @@
-FROM golang:1.17 as builder
+FROM golang:1.18.3 as builder
 ENV GOPATH=/go/
 USER root
 
