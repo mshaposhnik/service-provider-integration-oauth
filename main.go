@@ -234,6 +234,11 @@ func start(cfg config.Configuration, addr string, allowedOrigins []string, kubeC
 	}
 
 	for _, sp := range cfg.ServiceProviders {
+		if !sp.OAuthConfigured() {
+			zap.L().Warn("provider OAuth configuration not found. only manual token upload will be available", zap.String("type", string(sp.ServiceProviderType)))
+			continue
+		}
+
 		zap.L().Debug("initializing service provider controller", zap.String("type", string(sp.ServiceProviderType)), zap.String("url", sp.ServiceProviderBaseUrl))
 
 		controller, err := controllers.FromConfiguration(cfg, sp, authenticator, cl, strg, redirectTpl)
